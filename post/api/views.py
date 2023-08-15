@@ -1,4 +1,4 @@
-from rest_framework.generics import ListAPIView,RetrieveAPIView,DestroyAPIView,UpdateAPIView,CreateAPIView
+from rest_framework.generics import ListAPIView,RetrieveAPIView,DestroyAPIView,UpdateAPIView,CreateAPIView,RetrieveUpdateAPIView
 from post.api.serializers import PostSerializer,PostUpdateSerializer
 from post.models import Post
 from post.api.permissions import IsOwner
@@ -29,7 +29,7 @@ class PostDeleteAPIView(DestroyAPIView):
     lookup_field = 'slug'
     permission_classes = [IsOwner]
 
-class PostUpdateAPIView(UpdateAPIView):
+class PostUpdateAPIView(RetrieveUpdateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostUpdateSerializer
     lookup_field = 'slug'
