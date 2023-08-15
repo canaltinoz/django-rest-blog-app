@@ -14,7 +14,8 @@ class Comment(models.Model):
         ordering=('created',)
 
     def __str__(self):
-        return self.post.title + " " + self.user.username
+        return self.post.title + " -- " + self.user.username
+
 
     def save(self,*args,**kwargs):
         if not self.id:
