@@ -14,7 +14,7 @@ class PostSerializer(serializers.ModelSerializer):
             'image',
             'url',
             'created',
-            'modified_by'
+            'modified_by',
         ]
 
     def get_username(self,obj):
