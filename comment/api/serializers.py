@@ -24,6 +24,7 @@ class PostCommentSerializer(ModelSerializer):
     class Meta:
         model=Post
         fields=['title','slug','id']
+
 class CommentListSerializer(ModelSerializer):
     replies=SerializerMethodField()
     user=UserSerializer()
