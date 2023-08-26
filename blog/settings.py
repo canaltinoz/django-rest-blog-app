@@ -20,11 +20,14 @@ ALLOWED_HOSTS = []
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
+
     ],
 }
 
+
 SIMPLE_JWT ={
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15)
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=120)
 }
 
 # Application definition
@@ -40,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'comment',
     'favourite',
+    'account',
 ]
 
 MIDDLEWARE = [
