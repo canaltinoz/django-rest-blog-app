@@ -1,10 +1,12 @@
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.models import User
 from rest_framework import status
-from rest_framework.generics import RetrieveUpdateAPIView,get_object_or_404
+from rest_framework.generics import RetrieveUpdateAPIView,get_object_or_404,CreateAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from account.api.serializers import UserSerializer, ChangePasswordSerializer
+
+from account.api.permissions import NotAuthenticated
+from account.api.serializers import UserSerializer, ChangePasswordSerializer, RegisterSerializer
 from rest_framework.views import APIView
 
 class ProfileView(RetrieveUpdateAPIView):
@@ -40,3 +42,9 @@ class UpdatePassword(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
 
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+class CreateUserView(CreateAPIView):
+    model=User.objects.all()
+    serializer_class = RegisterSerializer
+    permission_classes = [NotAuthenticated]
+
