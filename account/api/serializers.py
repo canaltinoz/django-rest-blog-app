@@ -19,3 +19,11 @@ class UserSerializer(ModelSerializer):
         profile_serializer.save()
         return super(UserSerializer,self).update(instance,validated_data)
 
+class ChangePasswordSerializer(Serializer):
+    old_password=serializers.CharField(required=True)
+    new_password=serializers.CharField(required=True)
+
+    def validate_new_password(self,value):
+        validate_password(value)
+        return value
+
