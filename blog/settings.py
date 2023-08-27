@@ -22,10 +22,16 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication'
     ],
+    'DEFAULT_THROTTLE_CLASSES':{
+        'rest_framework.throttling.ScopedRateThrottle',
+    },
     'DEFAULT_THROTTLE_RATES': {
         'registerthrottle': '5/hour',
+        'viewthrottle':'5/hour',
+        'example_scope_name':'5/hour',
     }
 }
+
 
 SIMPLE_JWT ={
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=120)

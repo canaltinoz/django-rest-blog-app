@@ -1,12 +1,5 @@
-from rest_framework.throttling import SimpleRateThrottle
-class RegisterThrottle(SimpleRateThrottle):
+from rest_framework.throttling import AnonRateThrottle,UserRateThrottle
+class RegisterThrottle(AnonRateThrottle):
     scope='registerthrottle'
-    def get_cache_key(self, request, view):
-        if request.user.is_authenticated or request.method == 'GET':
-            return None
-
-        return self.cache_format % {
-            'scope' : self.scope,
-            'ident' : self.get_ident(request)
-        }
-
+class ViewThrottle(UserRateThrottle):
+    scope='viewthrottle'
