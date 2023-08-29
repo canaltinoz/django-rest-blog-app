@@ -1,4 +1,4 @@
-from django.urls import path,include
+from django.urls import path
 from post.api.views import PostListAPIView,PostDetailAPIView,PostUpdateAPIView,PostCreateAPIView
 
 app_name='post'

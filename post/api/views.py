@@ -1,7 +1,5 @@
 from rest_framework.generics import ListAPIView,RetrieveAPIView,CreateAPIView,RetrieveUpdateAPIView
 from rest_framework.mixins import DestroyModelMixin
-
-from account.api.throttles import ViewThrottle
 from post.api.serializers import PostSerializer,PostUpdateSerializer
 from post.models import Post
 from post.api.permissions import IsOwner
@@ -10,15 +8,14 @@ from rest_framework.filters import SearchFilter,OrderingFilter
 from post.api.paginations import PostPagination
 
 
-class PostListAPIView(ListAPIView,):
-    throttle_scope='example_scope_name'
+class PostListAPIView(ListAPIView):
     serializer_class = PostSerializer
     filter_backends = [SearchFilter,OrderingFilter]
     search_fields=['title']
     pagination_class = PostPagination
 
     def get_queryset(self):
-        queryset=Post.objects.filter(draft=False)
+        queryset =Post.objects.filter(draft=False)
         return queryset
 
 class PostDetailAPIView(RetrieveAPIView):
