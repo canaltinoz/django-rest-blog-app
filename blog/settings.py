@@ -23,8 +23,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication'
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'registerthrottle': '5/hour',
-        'viewthrottle':'5/hour',
+        'registerthrottle': '20/hour',
+        'viewthrottle':'20/hour',
     }
 }
 SIMPLE_JWT ={

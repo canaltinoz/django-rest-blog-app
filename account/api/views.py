@@ -27,18 +27,12 @@ class UpdatePassword(APIView):
     permission_classes = (IsAuthenticated,)
     def put(self,request,*args,**kwargs):
         self.object = self.request.user()
-        data={
-            'old_password':request.data['old_password'],
-            'new_password':request.data['new_password']
-        }
-        serializer=ChangePasswordSerializer(data=data)
+        serializer=ChangePasswordSerializer(data=request.data)
 
         if serializer.is_valid():
             old_password=serializer.data.get('old_password')
             if not self.object.check_password(old_password):
-                return Response({'old_password':'wrowng_password'}
-                                ,status=status.HTTP_400_BAD_REQUEST)
-
+                return Response({'old_password':'wrong_password'},status=status.HTTP_400_BAD_REQUEST)
             self.object.set_password(serializer.data.get('new_password'))
             self.object.save()
             update_session_auth_hash(request,self.object)
